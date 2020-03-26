@@ -1,0 +1,78 @@
+github加速
+https://www.ipaddress.com/ip-lookup
+查询 github.com 和 github.global.ssl.fastly.net 对应的ip地址，并添加到hosts文件中
+然后刷新dns缓存 ipconfig/flushdns
+
+
+原理相关：
+https://blog.csdn.net/qq_42394457/article/details/94493027
+
+真正的相关：
+https://www.jianshu.com/p/ad168cc3603e
+
+LettuceConnectionFactory
+	RedisConfiguration + LettuceClientConfiguration
+RedisTemplate
+	RedisSerializer
+CacheManager
+	RedisSerializer,RedisSerializationContext -- generate pair
+	RedisCacheWriter + RedisCacheConfiguration(need pair)
+
+-------------
+Scheduler === StdSchedulerFactory --> start() scheduleJob() shtudown()
+JobDetail === JobBuilder --> usingJobData()
+Trigger === TriggerBuilder --> usingJobData() startAt() endAt() startNow() withSchedule(ScheduleBuilder)
+
+-------------
+async Message model
+	message broker destination
+Jms场景：messages , event的处理 , 异步处理
+Jms Provider：消息缓存（队列/主题的作用）直到被消费或者超时，避免重复消费
+P2P：对应一个消费者和一个队列，多个消费者会随机消费队列中的消息，不需要消费者一直监听并且没有时间先后顺序（消费者可以先启动），但是需要回执
+PUB-SUB：对应多个消费者和一个主题，必须先订阅才能接收发布的消息，如果有可持久化订阅，则不用在线，否则消费者必须实时监听主题
+Jms相关接口以及对象 ConnectionFactory Connection Session Destination MessageProducer MessageConsumer
+
+-------------
+ShiroFilterFactory 
+	--> Map<Stirng,Fileter>,setFilters()
+	--> Map<String,String>,setFilterChainDefinitionMap
+	--> SecurityManager,setSecurityManager()
+SecurityManager
+	--> ShiroRealm o--- AuthorizingRealm
+	--> CacheManager
+ShiroReam
+	--> CredentialMatcher,setCredentialsMatcher()
+
+---------------
+## sb configuration
+	配置引用：
+	@Component @ConfigurationProperties(prefix="xxx") 可以对一些统一格式的配置批量设置
+	@Component @Value 也可以实现对于配置的集中管理（springboot中再也不需要手动编写ResourceLoader代码了）
+	使用static class静态类可以对配置文件进行嵌套
+	外部变量配置：
+	java -jar xxx.jar --spring.profiles.active=dev 会读取 application-dev.properties 配置文件
+	自动配置原理：
+	@EnableAutoConfiguration
+	https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html#core-properties
+
+## WebFlux
+	Mono Flux
+
+## spring restful api token validation & form validation
+guid : https://www.jianshu.com/p/e2d5f299883a
+HandlerMethodArgumentResolver : https://www.jianshu.com/p/40606baf49b8
+ModelAttribute : https://www.jianshu.com/p/0ec4e7afb7ed
+
+=============================
+
+
+
+target
+ObjectMapper
+GenericObjectPool 	https://www.jianshu.com/p/5cb54a5bfc3a
+JMS		https://blog.csdn.net/weixin_37352094/article/details/80500202
+RabbitMQ
+	https://www.jianshu.com/p/d2e3fd77c4f4
+	https://www.jianshu.com/p/2838890f3284
+RocketMQ
+apiboot
