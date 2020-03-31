@@ -62,9 +62,28 @@ ShiroReam
 guid : https://www.jianshu.com/p/e2d5f299883a
 HandlerMethodArgumentResolver : https://www.jianshu.com/p/40606baf49b8
 ModelAttribute : https://www.jianshu.com/p/0ec4e7afb7ed
+core point: HandlerInterceptorAdaptor WebMvcConfigurationSupport HandlerMethodArgumentResolver
+use token to keep user status
 
+## spring global exception handler
+1. Exception structure : self-defination Exception includes ExceptionCode,which can be presented as a Enum type,and an interface
+2. @RestControllerAdvice @ExceptionHandler
+	ResponseEntity.status(HttpStatus.valueOf(Integer.parseInt(exceptionCode.getCode())))
+                .contentType(MediaType.APPLICATION_JSON).body(webResult);
+
+
+## ms最常见的集成方式
+基础配置之pom 
+	ms druid mysql-jdbc
+1. xml 基础方式：直接在application.properties中定义所谓的mapper-locations以及typeAlias
+2. cluster方式，用于分库分表 需要多一个@MapperScan注解
+3. 注解方式，直接使用@Mapper以及@MapperScan注解即可
 =============================
-
+lambda gogogo
+collect() related:
+https://blog.csdn.net/liujun03/article/details/80701999 core: Collectors + complex reduce
+https://www.jianshu.com/p/3d4e76467990
+--> 为什么组合器有时并不会 生效？	CPU密集型的功能点
 
 
 target
